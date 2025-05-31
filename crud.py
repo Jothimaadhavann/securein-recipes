@@ -19,7 +19,7 @@ def search_recipes(db: Session, title: str = "", cuisine: str = "", max_calories
     if rating:
         query = query.filter(Recipe.rating >= rating)
     if max_calories:
-        # Use SQLite's json_extract to get calories from the nutrients JSON column
+        
         query = query.filter(cast(text("json_extract(nutrients, '$.calories')"), Float) <= max_calories)
 
     return query.all()
